@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WebSSExecutor - Kenzo</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #1e1e1e;
+      font-family: monospace;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      color: #00ffe0;
+    }
+
+    textarea, input, select {
+      width: 90%;
+      max-width: 800px;
+      background-color: #2b2b2b;
+      color: #00ff88;
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 15px;
+      margin: 10px 0;
+    }
+
+    button {
+      margin-top: 20px;
+      background-color: #00ff99;
+      color: black;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 30px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background-color: #00cc77;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 13px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔧 WebSSExecutor by Kenzo</h1>
+
+  <input type="text" id="usernameInput" placeholder="Masukkan username Roblox kamu...">
+
+  <select id="gameSelect">
+    <option value="johnreres">Place JohnReres</option>
+    <!-- Tambahkan game lain di sini nanti -->
+  </select>
+
+  <textarea id="scriptBox" placeholder="Ketik script Roblox-mu di sini..."></textarea><br>
+  <button onclick="executeScript()">Execute</button>
+
+  <div class="footer">
+    Game: <a href="https://www.roblox.com/games/127583162769707/Place-JohnReres" target="_blank" style="color: #00ffe0;">Place JohnReres</a><br>
+    FE-safe jika bukan di game ini • Dibackdoor oleh Kenzo
+  </div>
+
+  <script>
+    function executeScript() {
+      const username = document.getElementById("usernameInput").value;
+      const game = document.getElementById("gameSelect").value;
+      const script = document.getElementById("scriptBox").value;
+
+      if (!username || !script) {
+        alert("Isi dulu username dan script!");
+        return;
+      }
+
+      // Kirim ke server (ganti URL-nya kalau sudah ada endpoint backend)
+      fetch("https://your-api-endpoint.com/execute", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username: username,
+          game: game,
+          script: script
+        })
+      })
+      .then(response => {
+        alert("✅ Script berhasil dikirim ke server!");
+      })
+      .catch(error => {
+        alert("❌ Gagal mengirim script.");
+        console.error(error);
+      });
+    }
+  </script>
+</body>
+  </html>
